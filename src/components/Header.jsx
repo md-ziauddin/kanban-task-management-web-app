@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import iconDown from "../assets/iconDown.svg";
 import iconUp from "../assets/iconUp.svg";
 import Ellipsis from "../assets/IconVerticalEllipses.svg";
+import HeaderDropDown from "./HeaderDropDown";
 
 const Header = () => {
   const [openDrowndown, setOpenDrowndown] = useState(false);
@@ -28,11 +29,13 @@ const Header = () => {
 
         {/* Right Side */}
         <div className="flex space-x-4 items-center md:space-x-4">
-          <button className="button">+ Add New Task</button>
+          <button className="hidden md:block button">+ Add New Task</button>
           <button className="button py-1 px-3 md:hidden">+</button>
           <img src={Ellipsis} alt="ellipsis" className="cursor-pointer h-6" />
         </div>
       </header>
+
+      {openDrowndown && <HeaderDropDown setOpenDrowndown={setOpenDrowndown} />}
     </div>
   );
 };
