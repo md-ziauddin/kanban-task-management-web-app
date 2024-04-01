@@ -4,10 +4,17 @@ import iconUp from "../assets/iconUp.svg";
 import Ellipsis from "../assets/IconVerticalEllipses.svg";
 import HeaderDropDown from "./HeaderDropDown";
 import AddEditBoardModal from "../modals/AddEditBoardModal";
+import { useDispatch, useSelector } from "react-redux";
 
 const Header = ({ boardModalOpen, setBoardModalOpen }) => {
+  const dispatch = useDispatch();
+
   const [openDrowndown, setOpenDrowndown] = useState(false);
   const [boardType, setBoardType] = useState("add");
+
+  const boards = useSelector((state) => state.boards);
+  const board = boards.find((board) => board.isActive);
+
   return (
     <div className="p-4 fixed left-0 bg-white dark:bg-[#2b2c37] z-50 right-0">
       <header className="flex justify-between dark:text-white items-center">
@@ -18,7 +25,7 @@ const Header = ({ boardModalOpen, setBoardModalOpen }) => {
           <h3 className=" md:inline-block font-bold font-sans">TM</h3>
           <div className="flex items-center">
             <h3 className="truncate max-w-[200px] md:text-2xl text-xl font-bold md:ml-20 font-sans">
-              Board Name
+              {board.name}
             </h3>
             <img
               src={openDrowndown ? iconUp : iconDown}
