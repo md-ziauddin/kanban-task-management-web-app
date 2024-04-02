@@ -67,7 +67,12 @@ const Header = ({ boardModalOpen, setBoardModalOpen }) => {
 
         {/* Right Side */}
         <div className="flex space-x-4 items-center md:space-x-4">
-          <button className="hidden md:block button">+ Add New Task</button>
+          <button
+            className="hidden md:block button"
+            onClick={() => setOpenAddEditTask((state) => !state)}
+          >
+            + Add New Task
+          </button>
           <button
             className="button py-1 px-3 md:hidden"
             onClick={() => setOpenAddEditTask((state) => !state)}
