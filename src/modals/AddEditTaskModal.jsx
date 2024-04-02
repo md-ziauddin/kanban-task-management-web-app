@@ -9,27 +9,42 @@ const AddEditTaskModal = ({
   device,
   setOpenAddEditTask,
   taskIndex,
+  setIsTaskModalOpen,
   prevColIndex = 0,
 }) => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [descriptiom, setDescriptiom] = useState("");
   const [isValid, setIsValid] = useState(true);
-
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const board = useSelector((state) => state.boards).find(
     (board) => board.isActive
   );
 
   const columns = board.columns;
   const col = columns.find((col, index) => index === prevColIndex);
-
+  const task = col ? col.tasks.find((task, index) => index === taskIndex) : [];
   const [status, setStatus] = useState(columns[prevColIndex].name);
   const [newColIndex, setNewColIndex] = useState(prevColIndex);
+  const [description, setDescription] = useState("");
 
   const [subtasks, setSubtasks] = useState([
     { title: "", isCompleted: false, id: uuidv4() },
     { title: "", isCompleted: false, id: uuidv4() },
   ]);
+
+  console.log({ task });
+
+  if (type === "edit" && isFirstLoad) {
+    setSubtasks(
+      task.subtasks.map((subtask) => {
+        return { ...subtask, id: uuidv4() };
+      })
+    );
+    setTitle(task.title);
+    setDescription(task.description);
+    setIsFirstLoad(false);
+  }
 
   const onChange = (id, newValue) => {
     setSubtasks((prevState) => {
@@ -129,7 +144,7 @@ const AddEditTaskModal = ({
             Task Name
           </label>
           <textarea
-            value={descriptiom}
+            value={description}
             onChange={(e) => setDescriptiom(e.target.value)}
             className="bg-transparent px-4 py-2 outline-none focus:border-0 min-h-[200px] rounded-md text-sm border border-gray-600 focus:outline-[#635fc7] ring-0"
             placeholder="e.g: it's always good to take a break. This 15 minute break will recharge the batteries a little"
