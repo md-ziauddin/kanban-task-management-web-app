@@ -14,7 +14,6 @@ const AddEditTaskModal = ({
 }) => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
-  const [descriptiom, setDescriptiom] = useState("");
   const [isValid, setIsValid] = useState(true);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const board = useSelector((state) => state.boards).find(
@@ -80,7 +79,7 @@ const AddEditTaskModal = ({
       dispatch(
         boardSlice.actions.addTask({
           title,
-          descriptiom,
+          description,
           subtasks,
           status,
           newColIndex,
@@ -145,7 +144,7 @@ const AddEditTaskModal = ({
           </label>
           <textarea
             value={description}
-            onChange={(e) => setDescriptiom(e.target.value)}
+            onChange={(e) => setDescription(e.target.value)}
             className="bg-transparent px-4 py-2 outline-none focus:border-0 min-h-[200px] rounded-md text-sm border border-gray-600 focus:outline-[#635fc7] ring-0"
             placeholder="e.g: it's always good to take a break. This 15 minute break will recharge the batteries a little"
           />

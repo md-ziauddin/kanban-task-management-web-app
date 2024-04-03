@@ -50,8 +50,9 @@ const Header = ({ boardModalOpen, setBoardModalOpen }) => {
         {/* Left Side */}
 
         <div className="flex items-center space-x-2 md:space-x-4">
-          {/* <img src={logo} alt="logo" /> */}
-          <h3 className=" md:inline-block font-bold font-sans">TM</h3>
+          <h3 className=" md:inline-block font-bold font-sans">
+            Kanban Task Management
+          </h3>
           <div className="flex items-center">
             <h3 className="truncate max-w-[200px] md:text-2xl text-xl font-bold md:ml-20 font-sans">
               {board.name}
